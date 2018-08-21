@@ -18,6 +18,7 @@
         update_cache: yes
         dpkg_options: force-confdef,force-confold,force-unsafe-io
       with_items: 
+        - sudo
         - unzip
         - apt-transport-https
         - default-jre
