@@ -1,0 +1,47 @@
+# Ansible Playbook for Subutai ELK blueprint
+---
+
+- hosts: all
+  gather_facts: false
+  remote_user: root
+  tasks: 
+    - name: Add elastic.co repo key
+      raw: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+    - name: Enable ELK repositories
+      raw: echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
+
+    - name: Install tools
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+        dpkg_options: force-confdef,force-confold,force-unsafe-io
+      with_items: 
+        - unzip
+        - apt-transport-https
+        - default-jre
+        - nginx
+
+    - name: Install ELK Packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+        dpkg_options: force-confdef,force-confold,force-unsafe-io
+      with_items: 
+        - elasticsearch
+        - kibana
+        - logstash
+
+    - name: Enable ELK Services
+      systemd:
+        name: "{{ item }}"
+        enabled: yes
+        state: restarted
+      with_items:
+        - elasticsearch
+        - kibana
+        - logstash
+
+# vim: ts=2 et nowrap autoindent
