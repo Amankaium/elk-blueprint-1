@@ -5,12 +5,6 @@
   gather_facts: false
   remote_user: root
   tasks: 
-    - name: Add elastic.co repo key
-      raw: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-
-    - name: Enable ELK repositories
-      raw: echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list
-
     - name: Install tools
       apt:
         name: "{{ item }}"
@@ -23,6 +17,13 @@
         - apt-transport-https
         - default-jre
         - nginx
+        - wget
+
+    - name: Add elastic.co repo key
+      raw: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+
+    - name: Enable ELK repositories
+      raw: echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list
 
     - name: Install ELK Packages
       apt:
