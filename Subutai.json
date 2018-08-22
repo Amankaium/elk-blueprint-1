@@ -76,7 +76,7 @@
         "containerSize": {
             "description": "Container Size",
             "type": "enum",
-            "default": "MEDIUM",
+            "default": "LARGE",
             "validation": "TINY,SMALL,MEDIUM,LARGE,HUGE"
         }
     }
