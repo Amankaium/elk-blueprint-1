@@ -12,9 +12,15 @@
             "port-mapping": [
                 {
                     "protocol": "http",
-                    "domain": "${domainName}",
-                    "internal-port": "80",
+                    "domain": "${domainName1}",
+                    "internal-port": "5601",
                     "external-port": "80"
+                },
+                {
+                    "protocol": "http",
+                    "domain": "${domainName2}",
+                    "internal-port": "9200",
+                    "external-port": "9200"
                 }
             ]
         }
@@ -30,7 +36,7 @@
         "extra-vars": [
             {
                 "key": "domain_name",
-                "value": "${domainName}"
+                "value": "${domainName1}"
             }
         ],
         "groups": [
@@ -49,8 +55,14 @@
             "default": "elk",
             "validation": "[a-zA-Z0-9]+"
         },
-        "domainName": {
-            "description": "Enter the application domain name",
+        "domainName1": {
+            "description": "Enter the Kibana domain name",
+            "type": "domain",
+            "default": "change.the.domain",
+            "validation": "[a-zA-Z0-9]+"
+        },
+        "domainName2": {
+            "description": "Enter the ElasticSearch domain name",
             "type": "domain",
             "default": "change.the.domain",
             "validation": "[a-zA-Z0-9]+"
