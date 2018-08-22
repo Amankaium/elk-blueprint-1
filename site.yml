@@ -36,6 +36,15 @@
         - kibana
         - logstash
 
+    - name: Copy configurations
+      copy: 
+        src: "{{ item }}/"
+        dest: "/etc/{{ item }}/"
+      with_items:
+        - elasticsearch
+        - kibana
+        - logstash
+
     - name: Enable ELK Services
       systemd:
         name: "{{ item }}"
