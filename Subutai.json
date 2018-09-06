@@ -31,7 +31,7 @@
         }
     ],
     "ansible-configuration": {
-        "source-url": "https://github.com/happyaron/elk-blueprint/archive/master.zip",
+        "source-url": "https://github.com/subutai-blueprints/elk-blueprint-1/archive/master.zip",
         "ansible-playbook": "site.yml",
         "extra-vars": [
             {
